@@ -4,15 +4,21 @@ import {useForm} from "react-hook-form";
 import InputField from "@/components/forms/InputField";
 import {Button} from "@/components/ui/button";
 import FooterLink from "@/components/forms/FooterLink";
+import {useRouter} from "next/navigation";
+import {useState} from "react";
+import {authApi} from "@/lib/api";
 
 const signUp = () => {
+    const router = useRouter();
+    const [apiError, setApiError] = useState<string>("");
+
     const {
         register,
         handleSubmit,
         formState: { errors, isSubmitting },
     } = useForm<SignUpFormData>({
         defaultValues: {
-            fullName: '',
+            name: '',
             email: '',
             password: ''
         },
@@ -20,9 +26,12 @@ const signUp = () => {
     }, );
     const onSubmit = async (data: SignUpFormData) => {
         try {
-            console.log(data);
+            setApiError("");
+            await authApi.signUp(data)
+            router.push("/dashboard");
         } catch (e) {
             console.error(e);
+            setApiError(e instanceof Error ? e.message : "An error occurred");
         }
     }
 
@@ -32,14 +41,27 @@ const signUp = () => {
                 <h1 className="form-title">Sign up</h1>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+                    {/* API Error Message */}
+                    {apiError && (
+                        <div className="rounded-md bg-red-50 p-3 text-sm text-red-800 dark:bg-red-900/20 dark:text-red-400">
+                            {apiError}
+                        </div>
+                    )}
+
                     {/* INPUTS */}
                     <InputField
-                        name="fullName"
+                        name="name"
                         label="Full Name"
                         placeholder="John Doe"
                         register={register}
-                        error={errors.fullName}
-                        validation={{ required: 'Full name is required', minLength: 2 }}
+                        error={errors.name}
+                        validation={{
+                            required: 'Full name is required',
+                            minLength: {
+                                value: 2,
+                                message: 'Name must be at least 2 characters'
+                            }
+                        }}
                     />
 
                     <InputField
@@ -48,17 +70,29 @@ const signUp = () => {
                         placeholder="johndoe@email.com"
                         register={register}
                         error={errors.email}
-                        validation={{ required: 'Email is required', pattern: /^\w+@\w+\.\w+$/, message: 'Email address is required' }}
+                        validation={{
+                            required: 'Email is required',
+                            pattern: {
+                                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                                message: 'Invalid email address'
+                            }
+                        }}
                     />
 
                     <InputField
                         name="password"
-                        label="Pasword"
+                        label="Password"
                         placeholder="Enter a strong password"
                         type="password"
                         register={register}
                         error={errors.password}
-                        validation={{ required: 'Password is required', minLength: 8 }}
+                        validation={{
+                            required: 'Password is required',
+                            minLength: {
+                                value: 8,
+                                message: 'Password must be at least 8 characters'
+                            }
+                        }}
                     />
 
                     <Button type="submit" disabled={isSubmitting} className="blue-btn w-full mt-5">

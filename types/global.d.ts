@@ -5,7 +5,7 @@ declare global {
     }
 
     type SignUpFormData = {
-        fullName: string;
+        name: string;
         email: string;
         password: string;
     }
@@ -26,6 +26,22 @@ declare global {
         text: string;
         linkText: string;
         href: string;
+    }
+
+    type AuthResponse = {
+        message: string;
+        user: {
+            id: string;
+            name: string;
+            email: string;
+            role: string;
+        }
+    }
+
+    type AuthError = {
+        error: string;
+        details?: string;
+        message?: string;
     }
 }
 

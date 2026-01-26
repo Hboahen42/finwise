@@ -4,8 +4,13 @@ import {useForm} from "react-hook-form";
 import InputField from "@/components/forms/InputField";
 import {Button} from "@/components/ui/button";
 import FooterLink from "@/components/forms/FooterLink";
+import {useRouter} from "next/navigation";
+import {useState} from "react";
+import {authApi} from "@/lib/api";
 
 const signIn = () => {
+    const router = useRouter();
+    const [apiError, setApiError] = useState<string>("");
     const {
         register,
         handleSubmit,
@@ -19,9 +24,13 @@ const signIn = () => {
     }, );
     const onSubmit = async (data: SignInFormData) => {
         try {
-            console.log(data);
+            setApiError("");
+            await authApi.signIn(data)
+            router.push("/dashboard");
+
         } catch (e) {
             console.error(e);
+            setApiError(e instanceof Error ? e.message : "An error occurred");
         }
     }
 
@@ -31,21 +40,30 @@ const signIn = () => {
                 <h1 className="form-title">Welcome Back</h1>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+                    {/* API Error Message */}
+                    {apiError && (
+                        <div className="rounded-md bg-red-50 p-3 text-sm text-red-800 dark:bg-red-900/20 dark:text-red-400">{apiError}</div>
+                    )}
 
                     {/* INPUTS */}
-
                     <InputField
                         name="email"
                         label="Email"
                         placeholder="johndoe@email.com"
                         register={register}
                         error={errors.email}
-                        validation={{ required: 'Email is required', pattern: /^\w+@\w+\.\w+$/, message: 'Email address is required' }}
+                        validation={{
+                            required: 'Email is required',
+                            pattern: {
+                                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                                message: 'Email address is required'
+                            }
+                        }}
                     />
 
                     <InputField
                         name="password"
-                        label="Pasword"
+                        label="Password"
                         placeholder="Enter a strong password"
                         type="password"
                         register={register}
