@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import {authApi} from "@/lib/api";
 
 export default function DashboardPage() {
     const router = useRouter();
@@ -10,10 +11,7 @@ export default function DashboardPage() {
     const handleLogout = async () => {
         setLoading(true);
         try {
-            await fetch("http://localhost:3000/api/auth/sign-out", {
-                method: "POST",
-                credentials: "include",
-            });
+            await authApi.signOut()
             router.push("/");
         } catch (error) {
             console.error("Logout failed:", error);
