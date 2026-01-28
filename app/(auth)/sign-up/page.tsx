@@ -7,9 +7,11 @@ import FooterLink from "@/components/forms/FooterLink";
 import {useRouter} from "next/navigation";
 import {useState} from "react";
 import {authApi} from "@/lib/api";
+import {useAuth} from "@/contexts/AuthContext";
 
 const signUp = () => {
     const router = useRouter();
+    const { signUp } = useAuth();
     const [apiError, setApiError] = useState<string>("");
 
     const {
@@ -27,7 +29,7 @@ const signUp = () => {
     const onSubmit = async (data: SignUpFormData) => {
         try {
             setApiError("");
-            await authApi.signUp(data)
+            await signUp(data.name, data.email, data.password);
             router.push("/dashboard");
         } catch (e) {
             console.error(e);

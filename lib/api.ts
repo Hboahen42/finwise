@@ -1,4 +1,5 @@
 import axios from "axios";
+
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const api = axios.create({
@@ -12,6 +13,10 @@ const api = axios.create({
 api.interceptors.response.use(
     (response) => response,
     (error) => {
+        if (error.response?.status === 401) {
+            return Promise.reject(error);
+        }
+
         const errorMsg =
         error.response?.data?.error ||
         error.response?.data?.details ||
@@ -34,7 +39,6 @@ export const authApi = {
             email: data.email,
             password: data.password,
         })
-        console.log(response)
         return response.data
     },
 
@@ -43,13 +47,12 @@ export const authApi = {
             email: data.email,
             password: data.password,
         })
-        console.log(response)
         return response.data
     },
 
     signOut: async () => {
         const response = await api.post('/api/auth/sign-out')
-        console.log(response)
         return response.data
     }
 }
+export default api
