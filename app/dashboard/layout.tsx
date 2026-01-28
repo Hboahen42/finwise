@@ -1,3 +1,4 @@
+import {AuthProvider} from "@/contexts/AuthContext";
 
 
 const Layout = ({ children }: { children: React.ReactNode }) => {

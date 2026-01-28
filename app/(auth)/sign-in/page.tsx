@@ -7,9 +7,11 @@ import FooterLink from "@/components/forms/FooterLink";
 import {useRouter} from "next/navigation";
 import {useState} from "react";
 import {authApi} from "@/lib/api";
+import {useAuth} from "@/contexts/AuthContext";
 
 const signIn = () => {
     const router = useRouter();
+    const { signIn } = useAuth();
     const [apiError, setApiError] = useState<string>("");
     const {
         register,
@@ -25,7 +27,7 @@ const signIn = () => {
     const onSubmit = async (data: SignInFormData) => {
         try {
             setApiError("");
-            await authApi.signIn(data)
+            await signIn(data.email, data.password);
             router.push("/dashboard");
 
         } catch (e) {
@@ -56,7 +58,7 @@ const signIn = () => {
                             required: 'Email is required',
                             pattern: {
                                 value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                                message: 'Email address is required'
+                                message: 'Invalid email address'
                             }
                         }}
                     />
