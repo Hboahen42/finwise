@@ -1,3 +1,5 @@
+import React from "react";
+
 declare global {
     type SignInFormData = {
         email: string;
@@ -26,6 +28,12 @@ declare global {
         text: string;
         linkText: string;
         href: string;
+    }
+
+    type FeatureCardProps = {
+        icon: React.ReactNode;
+        title: string;
+        description: string;
     }
 
     type AuthResponse = {
