@@ -30,7 +30,7 @@ const HeroSection = () => {
                         </span>
                     </h1>
                     <p className="mx-auto mt-6 max-w-2xl text-lg text-zinc-600 dark:text-zinc-400">
-                        Take control of your finances with FinWise. Connect your bank accounts, track spending, and gain insights into your financial health-all in one place.
+                        Take control of your finances with FinWise. Connect your bank accounts, track spending, and gain insights into your financial health all in one place.
                     </p>
                     <div className="mt-10 flex items-center justify-center gap-4">
                         <Link

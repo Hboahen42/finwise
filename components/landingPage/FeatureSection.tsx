@@ -1,5 +1,5 @@
 import React from 'react'
-import FeatureCard from "@/components/FeatureCard";
+import FeatureCard from "@/components/landingPage/FeatureCard";
 import {Bell, Clock, CreditCard, PieChart, Shield, TrendingUp} from "lucide-react";
 
 const FeatureSection = () => {
@@ -8,7 +8,7 @@ const FeatureSection = () => {
             <div className="mx-auto max-w-7xl">
                 <div className="text-center">
                     <h2 className="text-3xl font-bold text-zinc-900 dark:text-zinc-50 sm:text-4xl">
-                        Everything you need to manager your money
+                        Everything you need to manage your money
                     </h2>
                     <p className="mt-4 text-lg text-zinc-600 dark:text-zinc-400">
                         Powerful features to help you understand and optimize your finances
@@ -55,7 +55,7 @@ const FeatureSection = () => {
                     <FeatureCard
                         icon={<Bell />}
                         title={"Budget Friendly"}
-                        description={"Set budgets and gets alerts when you're close to your limits"}
+                        description={"Set budgets and get alerts when you're close to your limits"}
                     />
 
                 </div>

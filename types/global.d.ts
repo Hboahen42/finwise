@@ -36,6 +36,8 @@ declare global {
         description: string;
     }
 
+    type Status = "idle" | "fetchingToken" | "ready" | "exchanging" | "success" | "error";
+
     type AuthResponse = {
         message: string;
         user: {
