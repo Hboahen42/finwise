@@ -26,6 +26,7 @@ jobs:
         env:
           QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
         with:
+          args: --apply-fixes
           # When pr-mode is set to true, Qodana analyzes only the files that have been changed
           pr-mode: false
           use-caches: true
@@ -34,4 +35,4 @@ jobs:
           # Upload Qodana results (SARIF, other artifacts, logs) as an artifact to the job
           upload-result: false
           # quick-fixes available in Ultimate and Ultimate Plus plans
-          push-fixes: 'none'
+          push-fixes: pull-request

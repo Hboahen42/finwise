@@ -43,4 +43,6 @@ profile:
 #    total: 50
 
 #Specify Qodana linter for analysis (Applied in CI/CD pipeline)
-linter: jetbrains/qodana-js:latest
+linter: jetbrains/qodana-js:2025.3
+
+fixesStrategy: apply
