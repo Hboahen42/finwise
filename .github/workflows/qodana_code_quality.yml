@@ -35,4 +35,4 @@ jobs:
           # Upload Qodana results (SARIF, other artifacts, logs) as an artifact to the job
           upload-result: false
           # quick-fixes available in Ultimate and Ultimate Plus plans
-          push-fixes: pull-request
+          push-fixes: "pull-request"
