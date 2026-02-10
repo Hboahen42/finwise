@@ -34,7 +34,11 @@ declare global {
         icon: React.ReactNode;
         title: string;
         description: string;
+        iconBg: string;
+        delay?: string;
     }
+
+    type Status = "idle" | "fetchingToken" | "ready" | "exchanging" | "success" | "error";
 
     type AuthResponse = {
         message: string;

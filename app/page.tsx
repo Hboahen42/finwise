@@ -1,12 +1,12 @@
-import Navbar from "@/components/Navbar";
-import HeroSection from "@/components/HeroSection";
-import FeatureSection from "@/components/FeatureSection";
-import CTASection from "@/components/CTASection";
-import Footer from "@/components/Footer";
+import Navbar from "@/components/landingPage/Navbar";
+import HeroSection from "@/components/landingPage/HeroSection";
+import FeatureSection from "@/components/landingPage/FeatureSection";
+import CTASection from "@/components/landingPage/CTASection";
+import Footer from "@/components/landingPage/Footer";
 
 export default function Home() {
     return (
-        <div className="min-h-screen bg-white dark:bg-zinc-950">
+        <div className="min-h-screen bg-[#0a0a0d]">
             {/* Navigation */}
             <Navbar />
 
