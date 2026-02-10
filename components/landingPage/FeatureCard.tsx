@@ -1,15 +1,13 @@
-function FeatureCard({ icon, title, description }: FeatureCardProps) {
+function FeatureCard({ icon, title, description,iconBg,delay = "" }: FeatureCardProps) {
     return (
-        <div className="group rounded-xl border border-zinc-200 bg-white p-6 transition-all hover:border-teal-500 hover:shadow-lg dark:border-zinc-800 dark:bg-zinc-950 dark:hover:border-teal-500">
-            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-teal-100 transition-colors group-hover:bg-teal-500 dark:bg-teal-900/20 dark:group-hover:bg-teal-500">
-                <span className="h-6 w-6 text-teal-600 transition-colors group-hover:text-white dark:text-teal-400 dark:group-hover:text-white">
-                    {icon}
-                </span>
+        <div className={`group rounded-2xl border border-white/6 bg-[#0f0f13] p-7 transition-all duration-300 hover:border-teal-500/50 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/30 animate-fade-up ${delay}`}>
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl mb-4" style={{ backgroundColor: iconBg }}>
+                {icon}
             </div>
-            <h3 className="mt-4 text-lg font-semibold text-zinc-900 dark:text-zinc-50">
+            <h3 className="text-[15px] font-bold text-white mb-2">
                 {title}
             </h3>
-            <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+            <p className="text-sm leading-relaxed text-zinc-500">
                 {description}
             </p>
         </div>

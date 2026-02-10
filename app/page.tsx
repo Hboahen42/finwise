@@ -6,7 +6,7 @@ import Footer from "@/components/landingPage/Footer";
 
 export default function Home() {
     return (
-        <div className="min-h-screen bg-white dark:bg-zinc-950">
+        <div className="min-h-screen bg-[#0a0a0d]">
             {/* Navigation */}
             <Navbar />
 
